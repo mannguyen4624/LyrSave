@@ -8,11 +8,11 @@ ws = wb.active
 # Outputs the kills and time remaining until plat goal is reached
 def remaining():
     # prompt for current plat
-    ws['C1'] = int(input("current plat = "))
+    ws['E1'] = int(input("current plat = "))
     
     # sum total
     total = 0
-    for cell in ws['A']:
+    for cell in ws['C']:
         if cell.value != None:
             total += cell.value
         else:
@@ -20,7 +20,7 @@ def remaining():
     print(str(total) + "p saved")
 
     #  (FLOOR((10*(C3+total)-c2)/9,1)-c1)/(C4*0.01)
-    c8 = math.floor(((10 * (ws['C3'].value + total) - ws['C2'].value) / 9 - ws['C1'].value) / (ws['C4'].value * 0.01))
+    c8 = math.floor(((10 * (ws['E3'].value + total) - ws['E2'].value) / 9 - ws['E1'].value) / (ws['E4'].value * 0.01))
 
     # hours = floor(c8/600)
     # minutes = mod(floor(c8/10),60)
@@ -32,12 +32,12 @@ def remaining():
 def stcalc():
     # prompt for spending target
     user = input('spending target = ')
-    if user != "quit":
-        ws['C3'] = int(user)
+    if user != "exit":
+        ws['E3'] = int(user)
 
         # sum all saved income
         total = 0
-        for cell in ws['A']:
+        for cell in ws['C']:
             if cell.value != None:
                 total += cell.value
             else:
@@ -45,7 +45,7 @@ def stcalc():
         
         # print the plat needed    
         # =FLOOR((10*(H6+total)-H3)/9,1)
-        print(str(math.floor((10 * (ws['C3'].value + total) - ws['C2'].value) / 9)) + "p needed")
+        print(str(math.floor((10 * (ws['E3'].value + total) - ws['E2'].value) / 9)) + "p needed")
 
         # print kills and time remaining
         # remaining()
@@ -54,7 +54,7 @@ def stcalc():
 def update():
     # prompt for gpk
     user = input("gold per kill = ")
-    if user != "quit":
+    if user != "exit":
         ws['C4'] = float(user)
         remaining()
 
@@ -62,15 +62,23 @@ def update():
 def spending():
     # prompt for plat before spending
     user = input("plat before spending = ")
-    if user != "quit":
-        ws['C1'] = int(user)
+    
+    # record current plat
+    for cell in ws['A']:
+            if cell.value is None:
+                cell.value = int(user)
+                break
+    
+    if user != "exit":
+        
+        ws['E1'] = int(user)
     
         total = 0
         # find empty row
-        for cell in ws['A']:
+        for cell in ws['C']:
             if cell.value is None:
                 # add current plat saved to list
-                saved = math.floor((ws['C1'].value - ws['C2'].value)/10)
+                saved = math.floor((ws['E1'].value - ws['E2'].value)/10)
                 cell.value = saved
                 total += saved
                 break
@@ -79,17 +87,22 @@ def spending():
         
         # prompt for plat after spending
         pas = int(input("plat after spending = "))
+        
+        for cell in ws['B']:
+            if cell.value is None:
+                cell.value = pas
+                break
 
         # set last plat and current plat to plat after spending
-        ws['C1'] = pas
-        ws['C2'] = pas
+        ws['E1'] = pas
+        ws['E2'] = pas
 
         print(str(total) + "p saved")
 
-# ask what the user wants to do then again after each action until they quit
+# ask what the user wants to do then again after each action until they exit
 choose = input("spend, target, or update? ")
-print("quit to exit")
-while choose != "quit":
+print("exit to exit")
+while choose != "exit":
     if choose == "spend":
         spending()
     elif choose == "target":
