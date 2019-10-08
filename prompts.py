@@ -1,6 +1,6 @@
 import math
 from openpyxl import Workbook,load_workbook 
-wb = load_workbook('lyr.xlsx')
+wb=load_workbook('lyr.xlsx')
 ws = wb.active
 
 # prompt for either: spending, calculate plat needed for spending target, update gold per kill
