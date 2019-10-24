@@ -24,11 +24,15 @@ def remaining():
     #  (FLOOR((10*(C3+total)-c2)/9,1)-c1)/(C4*0.01)
     c8 = math.floor(((10 * (ws['E3'].value + total) - ws['E2'].value) / 9 - ws['E1'].value) / (ws['E4'].value * 0.01))
 
-    # hours = floor(c8/600)
-    # minutes = mod(floor(c8/10),60)
-    # seconds = mod(floor(c8*6),60)
-    print(str("{:.0f}".format(c8)) + " kills")
-    print(str("{:.0f}".format(math.floor(c8/600))) + " hours " + str("{:.0f}".format(math.floor(c8/10) % 60)) + " minutes " + str("{:.0f}".format(math.floor(c8*6) % 60)) + " seconds")
+    if c8 < 0:
+        print("0 kills")
+        print("0 hours 0 minutes 0 seconds")
+    else:
+        # hours = floor(c8/600)
+        # minutes = mod(floor(c8/10),60)
+        # seconds = mod(floor(c8*6),60)
+        print(str("{:.0f}".format(c8)) + " kills")
+        print(str("{:.0f}".format(math.floor(c8/600))) + " hours " + str("{:.0f}".format(math.floor(c8/10) % 60)) + " minutes " + str("{:.0f}".format(math.floor(c8*6) % 60)) + " seconds")
 
 # CALCULATE
 def stcalc():
