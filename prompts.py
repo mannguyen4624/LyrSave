@@ -31,8 +31,8 @@ def remaining():
         # hours = floor(c8/600)
         # minutes = mod(floor(c8/10),60)
         # seconds = mod(floor(c8*6),60)
-        print(str(c8) + " kills")
-        print(str(math.floor(c8/600)) + " hours " + str(math.floor(c8/10) % 60) + " minutes " + str(math.floor(c8*6) % 60) + " seconds")
+        print(str("{:.0f}".format(c8)) + " kills")
+        print(str("{:.0f}".format(math.floor(c8/600))) + " hours " + str("{:.0f}".format(math.floor(c8/10) % 60)) + " minutes " + str("{:.0f}".format(math.floor(c8*6) % 60)) + " seconds")
 
 # CALCULATE
 def stcalc():
