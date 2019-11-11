@@ -10,7 +10,7 @@ ws = wb.active
 # Outputs the kills and time remaining until plat goal is reached
 def remaining():
     # prompt for current plat
-    ws['E1'] = int(raw_input("current plat = "))
+    ws['E1'] = int(input("current plat = "))
     
     # sum total
     total = 0
@@ -37,7 +37,7 @@ def remaining():
 # CALCULATE
 def stcalc():
     # prompt for spending target
-    user = raw_input('spending target = ')
+    user = input('spending target = ')
     if user != "exit":
         ws['E3'] = int(user)
 
@@ -59,7 +59,7 @@ def stcalc():
 # UPDATE
 def update():
     # prompt for gpk
-    user = raw_input("gold per kill = ")
+    user = input("gold per kill = ")
     if user != "exit":
         ws['C4'] = float(user)
         remaining()
@@ -67,7 +67,7 @@ def update():
 # SPENDING
 def spending():
     # prompt for plat before spending
-    user = raw_input("plat before spending = ")
+    user = input("plat before spending = ")
     if user != "exit":
         # record current plat
         for cell in ws['B']:
@@ -91,7 +91,7 @@ def spending():
                 total += cell.value
         
         # prompt for plat after spending
-        pas = int(raw_input("plat after spending = "))
+        pas = int(input("plat after spending = "))
         
         for cell in ws['A']:
             if cell.value is None:
@@ -105,7 +105,7 @@ def spending():
 
 
 # ask what the user wants to do then again after each action until they exit
-choose = raw_input("spend, target, or update? ")
+choose = input("spend, target, or update? ")
 print("exit to exit")
 while choose != "exit":
     if choose == "spend":
@@ -116,6 +116,6 @@ while choose != "exit":
         update()
     else:
         print("Invalid choice!")
-    choose = raw_input("spend, target, or update? ")
+    choose = input("spend, target, or update? ")
 
 wb.save("lyr.xlsx")
