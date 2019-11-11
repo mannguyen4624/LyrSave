@@ -19,7 +19,7 @@ def remaining():
             total += cell.value
         else:
             break
-    print(str(total) + "p saved")
+    print(str("{:.0f}".format(total)) + "p saved")
 
     #  (FLOOR((10*(C3+total)-c2)/9,1)-c1)/(C4*0.01)
     c8 = math.floor(((10 * (ws['E3'].value + total) - ws['E2'].value) / 9 - ws['E1'].value) / (ws['E4'].value * 0.01))
@@ -105,8 +105,8 @@ def spending():
 
 
 # ask what the user wants to do then again after each action until they exit
+print("type exit to quit")
 choose = raw_input("spend, target, or update? ")
-print("exit to exit")
 while choose != "exit":
     if choose == "spend":
         spending()
