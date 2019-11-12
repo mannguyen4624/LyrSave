@@ -2,7 +2,10 @@
 
 import math
 from openpyxl import Workbook,load_workbook 
-wb = load_workbook('lyr.xlsx')
+
+f = open("path.txt")
+wb = load_workbook(f.read()[:-1] + '/lyr.xlsx')
+f.close()
 ws = wb.active
 
 # prompt for either: spending, calculate plat needed for spending target, update gold per kill
@@ -115,4 +118,6 @@ while choose != "exit":
         print("Invalid choice!")
     choose = raw_input("spend, target, or update? ")
 
-wb.save("lyr.xlsx")
+f = open("path.txt")
+wb.save(f.read()[:-1] + "/lyr.xlsx")
+f.close()
