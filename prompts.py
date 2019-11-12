@@ -24,9 +24,8 @@ def remaining():
             break
     print(str("{:.0f}".format(total)) + "p saved")
 
-    #  (FLOOR((10*(C3+total)-c2)/9,1)-c1)/(C4*0.01)
+    # (FLOOR((10*(C3+total)-c2)/9,1)-c1)/(C4*0.01)
     c8 = math.floor(((10 * (float(ws['E3'].value) + total) - float(ws['E2'].value)) / 9 - user) / (ws['E4'].value * 0.01))
-
     if c8 < 0:
         print("0 kills")
         print("0 hours 0 minutes 0 seconds")
@@ -65,6 +64,7 @@ def update():
     user = raw_input("gold per kill = ")
     if user != "exit":
         ws['E4'] = float(user)
+        stcalc()
         remaining()
 
 # SPENDING
