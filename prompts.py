@@ -1,8 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import math
 from openpyxl import Workbook,load_workbook 
-wb=load_workbook('lyr.xlsx')
+wb = load_workbook('lyr.xlsx')
 ws = wb.active
 
 # prompt for either: spending, calculate plat needed for spending target, update gold per kill
@@ -10,7 +10,7 @@ ws = wb.active
 # Outputs the kills and time remaining until plat goal is reached
 def remaining():
     # prompt for current plat
-    ws['E1'] = int(raw_input("current plat = "))
+    user = int(raw_input("current plat = "))
     
     # sum total
     total = 0
@@ -22,7 +22,7 @@ def remaining():
     print(str("{:.0f}".format(total)) + "p saved")
 
     #  (FLOOR((10*(C3+total)-c2)/9,1)-c1)/(C4*0.01)
-    c8 = math.floor(((10 * (ws['E3'].value + total) - ws['E2'].value) / 9 - ws['E1'].value) / (ws['E4'].value * 0.01))
+    c8 = math.floor(((10 * (float(ws['E3'].value) + total) - float(ws['E2'].value)) / 9 - user) / (ws['E4'].value * 0.01))
 
     if c8 < 0:
         print("0 kills")
@@ -51,7 +51,7 @@ def stcalc():
         
         # print the plat needed    
         # =FLOOR((10*(H6+total)-H3)/9,1)
-        print(str("{:.0f}".format(math.floor((10 * (ws['E3'].value + total) - ws['E2'].value) / 9))) + "p needed")
+        print(str("{:.0f}".format(math.floor((10 * (int(ws['E3'].value) + total) - int(ws['E2'].value)) / 9))) + "p needed")
 
         # print kills and time remaining
         # remaining()
@@ -61,7 +61,7 @@ def update():
     # prompt for gpk
     user = raw_input("gold per kill = ")
     if user != "exit":
-        ws['C4'] = float(user)
+        ws['E4'] = float(user)
         remaining()
 
 # SPENDING
@@ -75,14 +75,12 @@ def spending():
                  cell.value = int(user)
                  break
     
-        ws['E1'] = int(user)
-    
         total = 0
         # find empty row
         for cell in ws['C']:
             if cell.value is None:
                 # add current plat saved to list
-                saved = math.floor((ws['E1'].value - ws['E2'].value)/10)
+                saved = math.floor((int(user) - int(ws['E2'].value))/10)
                 cell.value = saved
                 total += saved
                 print(str("{:.0f}".format(total)) + "p saved")
@@ -99,7 +97,6 @@ def spending():
                 break
 
         # set last plat and current plat to plat after spending
-        ws['E1'] = pas
         ws['E2'] = pas
 
 
