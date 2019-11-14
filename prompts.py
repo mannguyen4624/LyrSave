@@ -8,10 +8,10 @@ wb = load_workbook(f.read()[:-1] + '/lyr.xlsx')
 f.close()
 ws = wb.active
 
-# prompt for either: spending, calculate plat needed for spending target, update gold per kill
+# prompt for either: spending, calculate plat needed for spending target, remaining gold per kill
 
 # Outputs the kills and time remaining until plat goal is reached
-def remaining():
+def remainingcalc():
     # prompt for current plat
     user = int(raw_input("current plat = "))
     
@@ -24,9 +24,8 @@ def remaining():
             break
     print(str("{:.0f}".format(total)) + "p saved")
 
-    #  (FLOOR((10*(C3+total)-c2)/9,1)-c1)/(C4*0.01)
+    # (FLOOR((10*(C3+total)-c2)/9,1)-c1)/(C4*0.01)
     c8 = math.floor(((10 * (float(ws['E3'].value) + total) - float(ws['E2'].value)) / 9 - user) / (ws['E4'].value * 0.01))
-
     if c8 < 0:
         print("0 kills")
         print("0 hours 0 minutes 0 seconds")
@@ -37,7 +36,7 @@ def remaining():
         print(str("{:.0f}".format(c8)) + " kills")
         print(str("{:.0f}".format(math.floor(c8/600))) + " hours " + str("{:.0f}".format(math.floor(c8/10) % 60)) + " minutes " + str("{:.0f}".format(math.floor(c8*6) % 60)) + " seconds")
 
-# CALCULATE
+# TARGET
 def stcalc():
     # prompt for spending target
     user = raw_input('spending target = ')
@@ -57,15 +56,16 @@ def stcalc():
         print(str("{:.0f}".format(math.floor((10 * (int(ws['E3'].value) + total) - int(ws['E2'].value)) / 9))) + "p needed")
 
         # print kills and time remaining
-        # remaining()
+        # remainingcalc()
 
-# UPDATE
-def update():
+# REMAINING
+def remaining():
     # prompt for gpk
     user = raw_input("gold per kill = ")
     if user != "exit":
         ws['E4'] = float(user)
-        remaining()
+        stcalc()
+        remainingcalc()
 
 # SPENDING
 def spending():
@@ -106,17 +106,17 @@ def spending():
 
 # ask what the user wants to do then again after each action until they exit
 print("type exit to quit")
-choose = raw_input("spend, target, or update? ")
+choose = raw_input("spend, target, or remaining? ")
 while choose != "exit":
     if choose == "spend":
         spending()
     elif choose == "target":
         stcalc()
-    elif choose == "update":
-        update()
+    elif choose == "remaining":
+        remaining()
     else:
         print("Invalid choice!")
-    choose = raw_input("spend, target, or update? ")
+    choose = raw_input("spend, target, or remaining? ")
 
 f = open("path.txt")
 wb.save(f.read()[:-1] + "/lyr.xlsx")
