@@ -1,5 +1,7 @@
 #!/bin/bash
 
+touch path.txt
+echo $PWD > path.txt
 cd ./setup/
 ./remove_openpyxl.sh
 powershell.exe -File ./get_openpyxl.ps1
