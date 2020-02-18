@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt-get install python
+sudo apt-get install python-setuptools
 touch path.txt
 echo $PWD > path.txt
 cd ./setup/

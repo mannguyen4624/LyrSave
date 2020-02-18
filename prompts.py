@@ -73,10 +73,7 @@ def spending():
     user = raw_input("plat before spending = ")
     if user != "exit":
         # record current plat
-        for cell in ws['B']:
-             if cell.value is None:
-                 cell.value = int(user)
-                 break
+        ws['B'+str(len(ws['B'])+1)].value = int(user)
     
         total = 0
         # find empty row
@@ -93,14 +90,13 @@ def spending():
         
         # prompt for plat after spending
         pas = int(raw_input("plat after spending = "))
-        
+
+        # set last plat and current plat to plat after spending
+        ws['E2'] = pas
         for cell in ws['A']:
             if cell.value is None:
                 cell.value = pas
                 break
-
-        # set last plat and current plat to plat after spending
-        ws['E2'] = pas
 
 
 

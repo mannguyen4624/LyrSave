@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import math
-from pathlib import Path
 from openpyxl import *
 
 f = open("../path.txt")
