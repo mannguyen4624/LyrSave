@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import math
 from openpyxl import Workbook,load_workbook 
 
-f = open("path.txt")
+f = open("./path.txt")
 wb = load_workbook(f.read()[:-1] + '/lyr.xlsx')
 f.close()
 ws = wb.active
