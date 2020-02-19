@@ -7,7 +7,7 @@ simply asks the user the amounts of money they had and spit back out how much th
 # Installation
 1. Clone
 2. Go to that directory
-3. Run setup.sh
+3. Run 'setup/setup.sh'
 # How to use
 1. Open any shell
-2. Run prompts.py
+2. Run 'python src/prompts.py'
