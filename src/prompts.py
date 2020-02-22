@@ -13,7 +13,7 @@ ws = wb.active
 # Outputs the kills and time remaining until plat goal is reached
 def remainingcalc():
     # prompt for current plat
-    user = int(raw_input("current plat = "))
+    user = int(input("current plat = "))
     
     # sum total
     total = 0
@@ -39,7 +39,7 @@ def remainingcalc():
 # TARGET
 def stcalc():
     # prompt for spending target
-    user = raw_input('spending target = ')
+    user = input('spending target = ')
     if user != "exit":
         ws['E3'] = int(user)
 
@@ -61,7 +61,7 @@ def stcalc():
 # REMAINING
 def remaining():
     # prompt for gpk
-    user = raw_input("gold per kill = ")
+    user = input("gold per kill = ")
     if user != "exit":
         ws['E4'] = float(user)
         stcalc()
@@ -70,7 +70,7 @@ def remaining():
 # SPENDING
 def spending():
     # prompt for plat before spending
-    user = raw_input("plat before spending = ")
+    user = input("plat before spending = ")
     if user != "exit":
         # record current plat
         ws['B'+str(len(ws['B'])+1)].value = int(user)
@@ -89,7 +89,7 @@ def spending():
                 total += cell.value
         
         # prompt for plat after spending
-        pas = int(raw_input("plat after spending = "))
+        pas = int(input("plat after spending = "))
 
         # set last plat and current plat to plat after spending
         ws['E2'] = pas
@@ -102,7 +102,7 @@ def spending():
 
 # ask what the user wants to do then again after each action until they exit
 print("type exit to quit")
-choose = raw_input("spend, target, or remaining? ")
+choose = input("spend, target, or remaining? ")
 while choose != "exit":
     if choose == "spend":
         spending()
@@ -112,7 +112,7 @@ while choose != "exit":
         remaining()
     else:
         print("Invalid choice!")
-    choose = raw_input("spend, target, or remaining? ")
+    choose = input("spend, target, or remaining? ")
 
 f = open("path.txt")
 wb.save(f.read()[:-1] + "/lyr.xlsx")
