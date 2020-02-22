@@ -1,14 +1,16 @@
 #!/bin/bash
 
-sudo apt-get install python
-sudo apt-get install python-setuptools
-touch path.txt
-echo $PWD > path.txt
-cd ./setup/
-./remove_openpyxl.sh
-powershell.exe -File ./get_openpyxl.ps1
-./unzip_openpyxl.sh
-./install_openpyxl.sh
-./remove_openpyxl.sh
-
-./resetexcel.py
+echo "Adding path.txt files"
+cd src/
+SRC=$(pwd)
+echo "$SRC" > path.txt
+echo "$SRC" > ../path.txt
+echo "$SRC" > ../setup/path.txt
+echo "Added path.txt files"
+cd ../
+echo "Installing latest version of pip"
+python3 -m pip install --user --upgrade pip
+echo "Installing virtualenv"
+python3 -m pip install --user virtualenv
+echo "Setting up virtual environment"
+python3 -m venv env

@@ -1,3 +1,7 @@
 .vs/
+.vscode/
 path.txt
 lyr.xlsx
+bell.css
+update.sh
+env/
